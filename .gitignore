@@ -1,0 +1,14 @@
+.edge-crop-profile/
+.edge-dom-*/
+.edge-dom-profile/
+.edge-test-profile/
+__pycache__/
+*.py[cod]
+*.log
+*.db
+*.sqlite
+*.sqlite3
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
