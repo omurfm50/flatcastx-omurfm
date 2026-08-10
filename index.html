@@ -271,10 +271,28 @@
     .live-caster-logo {
       position: absolute;
       z-index: 4;
-      top: 17px;
+      top: 14px;
       left: 30px;
-      width: 69px;
-      height: auto;
+      display: inline-flex;
+      align-items: center;
+      height: 20px;
+      color: #fff;
+      font: bold italic 14px/1 Arial, sans-serif;
+      letter-spacing: -.6px;
+      text-shadow: 0 1px 1px #222;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .live-caster-domain {
+      margin-left: 2px;
+      padding: 2px 3px;
+      border-radius: 2px;
+      background: linear-gradient(#f03861, #c91642);
+      color: #fff;
+      font-size: 11px;
+      letter-spacing: -.4px;
+      text-shadow: 0 1px 1px #8b0929;
     }
 
     .live-volume {
@@ -856,7 +874,9 @@
       </section>
 
       <div class="radio-controls caster-radio-controls" role="group" aria-label="Caster.fm radyo kontrolleri">
-        <img class="live-caster-logo" src="https://cdn.cloud.caster.fm/images/white-logo.svg" alt="Caster.fm">
+        <span class="live-caster-logo" aria-label="ÖMÜR.fm">
+          <span>ÖMÜR</span><span class="live-caster-domain">.fm</span>
+        </span>
         <span class="radio-name" id="radio-now-playing" role="status" aria-live="polite" aria-label="Şu an çalan">
           <span class="radio-name-track" id="radio-now-playing-text">&#9835; &Ouml;M&Uuml;R FM &#9835;</span>
         </span>
