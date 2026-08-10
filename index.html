@@ -1,83 +1,1164 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="tr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#070a12" />
-    <title>ÖmürFm | Canlı Radyo</title>
-    <link rel="preconnect" href="https://flatcastx.com" />
-    <link rel="stylesheet" href="styles.css?v=7" />
-  </head>
-  <body>
-    <div class="ambient ambient-one" aria-hidden="true"></div>
-    <div class="ambient ambient-two" aria-hidden="true"></div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ömür FM internet radyosu">
+  <title>ÖMÜR FM</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --black: #000;
+      --wine: #770000;
+      --deep-wine: #570000;
+      --rose: #ff8c8c;
+      --red: #dd0000;
+      --yellow: #ffff66;
+      --blue: #069;
+      --silver: #ddd;
+      --section-gap: 10px;
+    }
 
-    <main class="page-shell">
-      <header class="radio-header">
-        <a class="brand" href="#player" aria-label="ÖmürFm ana sayfa">
-          <span class="brand-mark" aria-hidden="true">
-            <span></span><span></span><span></span><span></span>
-          </span>
-          <span class="brand-copy">
-            <strong>ÖMÜR<span>FM</span></strong>
-          </span>
-        </a>
+    * {
+      box-sizing: border-box;
+    }
 
-        <div class="live-pill" role="status">
-          <i aria-hidden="true"></i>
-          CANLI YAYIN
+    html {
+      background: var(--black);
+    }
+
+    body {
+      min-width: 320px;
+      margin: 0;
+      padding: 34px;
+      overflow-x: auto;
+      color: #000;
+      background: var(--black);
+      font-family: "Times New Roman", Times, serif;
+    }
+
+    .site-frame-viewport {
+      width: 100%;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    a:hover,
+    a:focus-visible {
+      filter: brightness(1.22);
+      text-shadow: 0 0 5px var(--rose);
+    }
+
+    .site-frame {
+      width: 100%;
+      min-width: 760px;
+      margin: 0 auto;
+      padding: 10px;
+      border: 10px outset #eee;
+      border-left-color: #888;
+      border-bottom-color: #888;
+      background: url("cranberrystrip1cp7.jpg") repeat;
+    }
+
+    .site-inner {
+      padding: var(--section-gap) 24px 18px;
+      border: 2px solid #111;
+      background: var(--black) url("therosestripflutedae7.jpg") repeat-y;
+      background-size: 100% auto;
+    }
+
+    .panel {
+      margin-right: auto;
+      margin-left: auto;
+      padding: 12px;
+      border: 1px solid #ddd;
+      background: var(--black) url("therosestrip3ki4.jpg") repeat-y;
+      background-size: 100% auto;
+    }
+
+    .panel-inner {
+      padding: 5px;
+      border: 2px inset #eee;
+      background: var(--black) url("7ve8.gif") repeat;
+    }
+
+    .panel-content {
+      padding: 8px;
+      background: var(--black) url("borda7eh7.jpg") repeat;
+    }
+
+    .nav-panel {
+      width: min(740px, 100%);
+      padding-top: 12px;
+    }
+
+    .brand-banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 115px;
+      border: 3px double #ddd;
+      overflow: hidden;
+      color: #ff2a2a;
+      background: #000;
+      font-family: Georgia, "Times New Roman", Times, serif;
+      font-size: 90px;
+      font-weight: 700;
+      font-style: italic;
+      line-height: 1;
+      letter-spacing: 3px;
+      text-shadow:
+        0 2px 0 #720000,
+        0 0 7px #f00,
+        0 0 18px rgba(255, 0, 0, .9);
+      white-space: nowrap;
+    }
+
+    .brand-banner span {
+      transform: translateY(6px);
+      -webkit-text-stroke: 1px #000;
+      text-stroke: 1px #000;
+    }
+
+    .welcome-panel {
+      width: min(740px, 100%);
+      margin-top: var(--section-gap);
+    }
+
+    .welcome {
+      margin: 0;
+      padding: 7px 18px;
+      border: 3px double #ddd;
+      background: var(--wine);
+      color: var(--rose);
+      font-family: "Verdana Ref", "Times New Roman", Times, serif;
+      font-size: 40px;
+      line-height: 1.25;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .dj-ticker {
+      width: min(940px, 100%);
+      height: 34px;
+      margin: var(--section-gap) auto 0;
+      overflow: hidden;
+      border: 2px inset #eee;
+      color: var(--yellow);
+      background: var(--deep-wine);
+      font-family: Verdana, Arial, sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 30px;
+      white-space: nowrap;
+    }
+
+    .dj-ticker-text {
+      display: inline-block;
+      min-width: 100%;
+      padding-left: 100%;
+      text-shadow: 0 0 5px var(--rose);
+      animation: dj-scroll 20s linear infinite;
+    }
+
+    @keyframes dj-scroll {
+      to {
+        transform: translateX(-100%);
+      }
+    }
+
+    .player-panel {
+      position: relative;
+      z-index: 6;
+      width: min(940px, 100%);
+      margin-top: var(--section-gap);
+    }
+
+    .player-panel .panel-content {
+      padding: 0;
+    }
+
+    .player {
+      display: grid;
+      place-items: center;
+      width: 100%;
+      height: 554px;
+      border: 2px inset #eee;
+      background:
+        linear-gradient(rgba(0, 0, 0, .18), rgba(0, 0, 0, .18)),
+        var(--black) url("borda7eh7.jpg") center / cover;
+      color: var(--rose);
+      text-align: center;
+    }
+
+    .player iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .radio-controls {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      width: 430px;
+      max-width: 100%;
+      height: 44px;
+      margin: var(--section-gap) auto 0;
+      padding: 7px 5px;
+      overflow: hidden;
+      border: 2px solid #151719;
+      border-radius: 22px;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .65),
+        inset 0 -4px 7px rgba(0, 0, 0, .9),
+        0 1px 0 #777,
+        0 0 0 2px #000,
+        0 3px 5px rgba(0, 0, 0, .8);
+      background:
+        linear-gradient(180deg, #777c7f 0%, #292c2e 38%, #090a0b 58%, #34383a 100%);
+      color: #d8d8d8;
+      font: 11px Tahoma, Arial, sans-serif;
+    }
+
+    .caster-radio-controls {
+      width: 714px;
+      max-width: none;
+      height: 48px;
+      padding: 0;
+      border-radius: 24px;
+      background: #686868;
+    }
+
+    .caster-radio-controls .cstrEmbed {
+      position: absolute !important;
+      right: auto !important;
+      top: -132px !important;
+      bottom: auto !important;
+      left: 16px !important;
+      width: 714px !important;
+      max-width: none !important;
+      height: 192px !important;
+      border: 0 !important;
+    }
+
+    .caster-radio-controls .cstrEmbed iframe {
+      position: absolute !important;
+      right: auto !important;
+      top: 0 !important;
+      bottom: auto !important;
+      left: -7px !important;
+      width: 714px !important;
+      max-width: none !important;
+      height: 192px !important;
+      border: 0 !important;
+    }
+
+    .caster-radio-controls .cstrEmbed > a {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+    }
+
+    .live-caster-logo {
+      position: absolute;
+      z-index: 4;
+      top: 17px;
+      left: 30px;
+      width: 69px;
+      height: auto;
+    }
+
+    .live-volume {
+      position: absolute;
+      z-index: 4;
+      top: 13px;
+      left: 362px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 20px;
+      color: #f2f2f2;
+    }
+
+    .live-volume-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 18px;
+      width: 18px;
+      height: 18px;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: #f2f2f2;
+    }
+
+    button.live-volume-icon { cursor: pointer; }
+
+    .live-volume-icon svg {
+      display: block;
+      width: 18px;
+      height: 18px;
+    }
+
+    .live-volume-slider {
+      width: 132px;
+      height: 19px;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .live-volume-slider::-webkit-slider-runnable-track {
+      height: 5px;
+      border: 0;
+      background: #e81e4d;
+    }
+
+    .live-volume-slider::-webkit-slider-thumb {
+      width: 19px;
+      height: 19px;
+      margin-top: -7px;
+      border: 0;
+      border-radius: 50%;
+      background: #f2f2f2;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .live-volume-slider::-moz-range-track {
+      height: 5px;
+      border: 0;
+      background: #e81e4d;
+    }
+
+    .live-volume-slider::-moz-range-thumb {
+      width: 19px;
+      height: 19px;
+      border: 0;
+      border-radius: 50%;
+      background: #f2f2f2;
+    }
+
+    .live-play {
+      position: absolute;
+      z-index: 5;
+      top: 10px;
+      right: 25px;
+      display: flex;
+      width: 120px;
+      height: 21px;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      border: 0;
+      border-radius: 3px;
+      background: transparent;
+      color: #fff;
+      font: bold 14px Tahoma, Arial, sans-serif;
+      cursor: pointer;
+    }
+
+    .live-play-icon,
+    .live-play-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 21px;
+    }
+
+    .live-play-icon {
+      width: 38px;
+      background: linear-gradient(90deg, #df4267, #c72e53);
+      font-size: 17px;
+    }
+
+    .live-play-label {
+      width: 82px;
+      background: #dc4166;
+    }
+
+    .caster-radio-controls .radio-name {
+      position: absolute;
+      z-index: 3;
+      top: 9px;
+      right: 355px;
+      left: 121px;
+      height: 28px;
+      border-radius: 14px;
+      background: linear-gradient(#030303, #111);
+      pointer-events: none;
+    }
+
+    .caster-radio-controls .radio-name-track {
+      line-height: 26px;
+    }
+
+    .caster-left-cap,
+    .caster-right-cap {
+      position: absolute;
+      z-index: 6;
+      top: 3px;
+      bottom: 3px;
+      width: 24px;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .45),
+        inset 0 -3px 5px rgba(0, 0, 0, .55);
+      background: linear-gradient(180deg, #777a7c 0%, #55585a 48%, #343638 100%);
+      pointer-events: none;
+    }
+
+    .caster-left-cap {
+      left: 3px;
+      border-radius: 21px 0 0 21px;
+    }
+
+    .caster-right-cap {
+      right: 3px;
+      border-radius: 0 21px 21px 0;
+    }
+
+    .radio-controls::before {
+      position: absolute;
+      top: 3px;
+      right: 16px;
+      left: 16px;
+      height: 7px;
+      border-radius: 50%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .32), transparent);
+      content: "";
+      pointer-events: none;
+    }
+
+    .caster-radio-controls::before {
+      z-index: 2;
+    }
+
+    .radio-control-button {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 76px;
+      gap: 4px;
+      min-width: 0;
+      height: 25px;
+      margin: 0;
+      padding: 0 7px;
+      border: 1px solid #111;
+      border-radius: 14px;
+      box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, .42),
+        inset 0 -2px 3px rgba(0, 0, 0, .76),
+        0 1px 2px #050505;
+      background:
+        linear-gradient(180deg, #777b7d 0%, #35383a 43%, #161819 55%, #36393b 100%);
+      color: #e8e8e8;
+      font: 10px/1 Tahoma, Arial, sans-serif;
+      letter-spacing: 2px;
+      text-shadow: 0 -1px 0 #000, 0 0 4px currentColor;
+      cursor: pointer;
+    }
+
+    #radio-play {
+      color: #70f071;
+    }
+
+    #radio-stop {
+      color: #ff6868;
+      margin-left: -3px;
+    }
+
+    .radio-control-button:hover,
+    .radio-control-button:focus-visible {
+      outline: 1px solid currentColor;
+      outline-offset: 1px;
+      filter: brightness(1.18);
+    }
+
+    .radio-control-button:active {
+      transform: translateY(1px);
+      box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, .9),
+        0 1px 0 rgba(255, 255, 255, .12);
+    }
+
+    .control-label {
+      white-space: nowrap;
+    }
+
+    .play-icon {
+      display: block;
+      width: 0;
+      height: 0;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 8px solid currentColor;
+      filter: drop-shadow(0 1px 0 #000);
+    }
+
+    .stop-icon {
+      display: block;
+      width: 9px;
+      height: 9px;
+      border: 1px solid rgba(255, 255, 255, .55);
+      background: currentColor;
+      box-shadow: 0 1px 0 #000, inset 0 1px 1px rgba(255, 255, 255, .45);
+    }
+
+    .radio-name {
+      position: relative;
+      flex: 1 1 auto;
+      min-width: 0;
+      height: 22px;
+      padding: 0;
+      overflow: hidden;
+      border: 1px solid #070707;
+      border-radius: 12px;
+      box-shadow:
+        inset 0 1px 3px #000,
+        0 1px 0 rgba(255, 255, 255, .18);
+      background: linear-gradient(#030303, #111);
+      color: #f4f4f4;
+      line-height: 20px;
+      text-shadow: 0 0 4px #6d28d9;
+      white-space: nowrap;
+    }
+
+    .radio-name-track {
+      display: inline-block;
+      min-width: 100%;
+      padding: 0 8px;
+      line-height: 20px;
+      text-align: center;
+    }
+
+    .radio-name-track.is-scrolling {
+      will-change: transform;
+      animation: radio-name-scroll 12s linear infinite;
+    }
+
+    @keyframes radio-name-scroll {
+      from {
+        transform: translateX(100%);
+      }
+
+      to {
+        transform: translateX(-100%);
+      }
+    }
+
+    .status-light {
+      flex: 0 0 31px;
+      width: 31px;
+      height: 25px;
+      margin: 0 2px;
+      border: 1px solid #101010;
+      border-radius: 50%;
+      box-shadow:
+        inset 0 1px 2px rgba(255, 255, 255, .35),
+        inset 0 -2px 3px #000,
+        0 1px 2px #000;
+      background: linear-gradient(#575b5d, #171819);
+    }
+
+    .status-light::after {
+      display: block;
+      width: 12px;
+      height: 12px;
+      margin: 5px auto;
+      border: 1px solid #155c20;
+      border-radius: 50%;
+      box-shadow: 0 0 7px #32ff59, inset 0 1px 2px #baffc6;
+      background: radial-gradient(circle at 40% 30%, #8dff9e, #16a437 62%, #075516);
+      content: "";
+    }
+
+    .status-light.is-stopped::after {
+      border-color: #6b1111;
+      box-shadow: 0 0 7px #ff3030, inset 0 1px 2px #ffc0c0;
+      background: radial-gradient(circle at 40% 30%, #ff9a9a, #cf2020 62%, #680909);
+    }
+
+    .volume-control {
+      display: flex;
+      align-items: center;
+      flex: 0 0 74px;
+      gap: 2px;
+    }
+
+    .volume-icon {
+      width: 21px;
+      padding: 0;
+      border: 0;
+      color: #bfc1c2;
+      background: transparent;
+      font-size: 16px;
+      line-height: 1;
+      text-shadow: 0 1px 0 #111;
+      cursor: pointer;
+    }
+
+    .volume-icon:hover,
+    .volume-icon:focus-visible {
+      color: #fff;
+      outline: 1px solid #777;
+    }
+
+    .volume-slider {
+      width: 51px;
+      height: 14px;
+      margin: 0;
+      appearance: none;
+      border-radius: 2px;
+      background: transparent;
+      accent-color: #d7d7d7;
+      cursor: pointer;
+    }
+
+    .volume-slider::-webkit-slider-runnable-track {
+      height: 5px;
+      border: 1px solid #777;
+      border-radius: 2px;
+      background: #bfc0c1;
+    }
+
+    .volume-slider::-webkit-slider-thumb {
+      width: 13px;
+      height: 13px;
+      margin-top: -5px;
+      appearance: none;
+      border: 1px solid #888;
+      border-radius: 50%;
+      background: #ddd;
+    }
+
+    .volume-slider::-moz-range-track {
+      height: 4px;
+      border: 1px solid #777;
+      border-radius: 2px;
+      background: #bfc0c1;
+    }
+
+    .volume-slider::-moz-range-thumb {
+      width: 11px;
+      height: 11px;
+      border: 1px solid #888;
+      border-radius: 50%;
+      background: #ddd;
+    }
+
+    .radio-message {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .credits {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      margin: 16px auto 18px;
+      color: #f00;
+      font-weight: 700;
+      font-style: italic;
+      white-space: nowrap;
+    }
+
+    .designer {
+      color: var(--yellow);
+    }
+
+    .year {
+      color: var(--blue);
+    }
+
+    .counter-label {
+      margin-left: 8px;
+    }
+
+    .counter {
+      padding: 1px 4px;
+      border: 1px inset #777;
+      border-right: 0;
+      border-bottom: 0;
+      color: #aaa;
+      background: #181818;
+      font-family: "Courier New", monospace;
+      font-style: normal;
+      letter-spacing: 2px;
+    }
+
+    .heart {
+      position: fixed;
+      z-index: 5;
+      top: -2rem;
+      color: #b00000;
+      font-size: 18px;
+      pointer-events: none;
+      text-shadow: 0 0 4px #ff8c8c;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translate3d(25px, calc(100vh + 4rem), 0) rotate(360deg);
+      }
+    }
+
+    .mouse-clock {
+      position: fixed;
+      z-index: 20;
+      top: 0;
+      left: 0;
+      display: none;
+      min-width: 78px;
+      padding: 4px 7px;
+      border: 1px solid #330;
+      border-radius: 50%;
+      color: #fff;
+      background: rgba(0, 0, 0, .78);
+      font: 11px Tahoma, Arial, sans-serif;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .mouse-clock time {
+      color: #ff1f1f;
+      font-weight: 700;
+    }
+
+    .mouse-clock small {
+      display: block;
+      color: #ff0;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 800px) {
+      body {
+        padding: 0;
+        overflow-x: hidden;
+      }
+
+      .site-frame-viewport {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .site-frame {
+        width: 760px;
+        min-width: 760px;
+        margin: 0;
+        transform: scale(var(--mobile-scale, 1));
+        transform-origin: top left;
+      }
+
+      .player {
+        position: relative;
+        display: block;
+        height: 388px;
+        overflow: hidden;
+      }
+
+      .player iframe {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 900px;
+        height: 554px;
+        transform: scale(.6933333333);
+        transform-origin: top left;
+      }
+
+      .mouse-clock {
+        display: none !important;
+      }
+
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .heart {
+        display: none;
+      }
+
+      .dj-ticker-text {
+        padding-left: 0;
+        text-align: center;
+        animation: none;
+      }
+
+      .radio-name-track.is-scrolling {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="site-frame-viewport">
+    <main class="site-frame">
+      <div class="site-inner">
+      <section class="panel nav-panel" aria-label="Ömür FM logosu">
+        <div class="panel-inner">
+          <div class="panel-content">
+            <div class="brand-banner"><span>ÖMÜR FM</span></div>
+          </div>
         </div>
-      </header>
-
-      <section class="hero" aria-labelledby="page-title">
-        <p class="eyebrow">7/24 KESİNTİSİZ MÜZİK</p>
-        <h1 id="page-title">ÖmürFm şimdi <em>yayında.</em></h1>
-        <p class="intro">Sohbete katıl, yayını dinle ve müziğin keyfini çıkar.</p>
-
-        <div class="player-toolbar">
-          <div class="station-state">
-            <span class="equalizer" aria-hidden="true">
-              <i></i><i></i><i></i><i></i><i></i>
-            </span>
-            <span>
-              <strong>ÖmürFm Canlı Ses</strong>
-              <small id="playerStatus">Dinlemek için CANLI SES'e dokunun</small>
-            </span>
-          </div>
-          <span class="source-badge">CASTER.FM</span>
-          <div class="toolbar-actions">
-            <button class="power-button" id="playToggle" type="button">SES AÇ</button>
-          </div>
-        </div>
-
-        <div class="player-frame is-open" id="player">
-          <div class="frame-loader" aria-hidden="true">
-            <span></span>
-            Yayına bağlanıyor…
-          </div>
-          <div class="caster-player" id="casterPlayer" aria-label="ÖmürFm canlı sesi aç veya kapat">
-            <iframe
-              src="https://flatcastx.com/sid/1567"
-              width="100%"
-              height="520"
-              frameborder="0"
-              allow="autoplay"
-              title="FlatcastX Canlı Yayın"
-            ></iframe>
-          </div>
-        </div>
-
-        <p class="autoplay-note">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8v4m0 4h.01M10.3 3.5 2.4 17.2A2 2 0 0 0 4.1 20h15.8a2 2 0 0 0 1.7-2.8L13.7 3.5a2 2 0 0 0-3.4 0Z" /></svg>
-          Yayın sesini açmak veya kapatmak için yayındaki SES düğmesini kullanın.
-        </p>
       </section>
 
-      <footer>
-        <span>© <span id="year"></span> ÖMÜRFM <span class="deploy-note">(redeploy)</span></span>
-        <span class="footer-dot">Yayın açık</span>
-      </footer>
-    </main>
+      <section class="panel welcome-panel">
+        <div class="panel-inner">
+          <div class="panel-content">
+            <h1 class="welcome">ÖMÜR FM'e HOŞ GELDİNİZ...</h1>
+          </div>
+        </div>
+      </section>
 
-  </body>
+      <div class="dj-ticker" role="marquee" aria-label="Yayındaki DJ">
+        <span class="dj-ticker-text">YAYINDA: DJ ......</span>
+      </div>
+
+      <section class="panel player-panel" aria-label="Radyo oynatıcı">
+        <div class="panel-inner">
+          <div class="panel-content">
+            <div class="player">
+              <iframe
+                src="https://flatcastx.com/sid/1567"
+                width="900"
+                height="554"
+                frameborder="0"
+                allow="autoplay"
+                title="Ömür FM radyo yayını"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="radio-controls caster-radio-controls" role="group" aria-label="Caster.fm radyo kontrolleri">
+        <img class="live-caster-logo" src="https://cdn.cloud.caster.fm/images/white-logo.svg" alt="Caster.fm">
+        <span class="radio-name" id="radio-now-playing" role="status" aria-live="polite" aria-label="Şu an çalan">
+          <span class="radio-name-track" id="radio-now-playing-text">&#9835; &Ouml;M&Uuml;R FM &#9835;</span>
+        </span>
+        <div class="live-volume">
+          <button class="live-volume-icon" id="live-radio-mute" type="button" aria-label="Sesi kapat" title="Sesi kapat">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path fill="currentColor" d="M4 9v6h4l5 4V5L8 9H4z"></path>
+            </svg>
+          </button>
+          <input class="live-volume-slider" id="live-radio-volume" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Ses seviyesi">
+          <span class="live-volume-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path fill="currentColor" d="M4 9v6h4l5 4V5L8 9H4z"></path>
+              <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M16 8.5c1.6 1.7 1.6 5.3 0 7M19 6c3.2 3.3 3.2 8.7 0 12"></path>
+            </svg>
+          </span>
+        </div>
+        <button class="live-play" id="live-radio-play" type="button" aria-label="Radyoyu oynat">
+          <span class="live-play-icon" id="live-radio-play-icon">&#9654;</span>
+          <span class="live-play-label" id="live-radio-play-label">PLAY</span>
+        </button>
+        <span class="caster-left-cap" aria-hidden="true"></span>
+        <span class="caster-right-cap" aria-hidden="true"></span>
+      </div>
+
+      <div hidden aria-hidden="true">
+        <button id="radio-play" type="button"></button>
+        <button id="radio-stop" type="button"></button>
+        <span id="radio-status-light" class="is-stopped"></span>
+        <button id="radio-mute" type="button"></button>
+        <input id="radio-volume" type="range" min="0" max="1" step="0.01" value="0.8">
+        <span class="radio-message" id="radio-message" role="status" aria-live="polite"></span>
+        <audio id="radio-audio" preload="none" src="https://sapircast.caster.fm:17681/BHufv?token=ce180395cb90e787d23af59e7ff7e580"></audio>
+      </div>
+
+      <footer class="credits">
+        <span>Web Tasarım :</span>
+        <span class="designer">SeLoCaN</span>
+        <span class="year">2026 ©</span>
+        <span class="counter-label">Ziyaretçi Sayısı :</span>
+        <output class="counter" id="visitor-count">000001</output>
+      </footer>
+
+      </div>
+    </main>
+  </div>
+
+  <div class="mouse-clock" id="mouse-clock" aria-hidden="true">
+    <time id="clock-time"></time>
+    <small id="clock-date"></small>
+  </div>
+
+  <script>
+    (() => {
+      const clock = document.querySelector("#mouse-clock");
+      const clockTime = document.querySelector("#clock-time");
+      const clockDate = document.querySelector("#clock-date");
+      const counter = document.querySelector("#visitor-count");
+      const radioAudio = document.querySelector("#radio-audio");
+      const radioPlay = document.querySelector("#radio-play");
+      const radioStop = document.querySelector("#radio-stop");
+      const radioStatusLight = document.querySelector("#radio-status-light");
+      const radioMute = document.querySelector("#radio-mute");
+      const radioVolume = document.querySelector("#radio-volume");
+      const radioMessage = document.querySelector("#radio-message");
+      const radioNowPlaying = document.querySelector("#radio-now-playing");
+      const radioNowPlayingText = document.querySelector("#radio-now-playing-text");
+      const liveRadioPlay = document.querySelector("#live-radio-play");
+      const liveRadioPlayIcon = document.querySelector("#live-radio-play-icon");
+      const liveRadioPlayLabel = document.querySelector("#live-radio-play-label");
+      const liveRadioMute = document.querySelector("#live-radio-mute");
+      const liveRadioVolume = document.querySelector("#live-radio-volume");
+      const frameViewport = document.querySelector(".site-frame-viewport");
+      const siteFrame = document.querySelector(".site-frame");
+      const mobileLayout = window.matchMedia("(max-width: 800px)");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      const cleanMetadata = (value) => String(value || "").replace(/\s+/g, " ").trim();
+
+      const setNowPlaying = (artist, title) => {
+        const cleanArtist = cleanMetadata(artist);
+        const cleanTitle = cleanMetadata(title);
+        const label = [cleanArtist, cleanTitle].filter(Boolean).join(" - ");
+
+        if (!label || !radioNowPlayingText) return;
+        radioNowPlayingText.textContent = `♫ ${label} ♫`;
+        radioNowPlayingText.classList.add("is-scrolling");
+        radioNowPlaying?.setAttribute("aria-label", `Şu an çalan: ${label}`);
+
+        // Yeni parça geldiğinde kayan yazıyı baştan başlat.
+        radioNowPlayingText.style.animation = "none";
+        void radioNowPlayingText.offsetWidth;
+        radioNowPlayingText.style.removeProperty("animation");
+      };
+
+      const readNowPlayingPayload = (payload) => {
+        if (!payload) return;
+
+        let data = payload;
+        if (typeof data === "string") {
+          try {
+            data = JSON.parse(data);
+          } catch {
+            const parts = cleanMetadata(data).split(/\s+-\s+/, 2);
+            if (parts.length === 2) setNowPlaying(parts[0], parts[1]);
+            return;
+          }
+        }
+
+        if (typeof data !== "object") return;
+        const metadata = data.metadata || data.nowPlaying || data.now_playing || data.track || data.song || data;
+        if (typeof metadata === "string") {
+          readNowPlayingPayload(metadata);
+          return;
+        }
+        const artist = metadata.artist || metadata.artistName || metadata.artist_name;
+        const title = metadata.title || metadata.songTitle || metadata.song_title || metadata.trackTitle || metadata.track_title;
+        setNowPlaying(artist, title);
+      };
+
+      // Caster.fm/FlatcastX playerlarının gönderdiği parça bilgisini kabul eder.
+      window.addEventListener("message", (event) => {
+        let messageHost = "";
+        try {
+          messageHost = new URL(event.origin).hostname;
+        } catch {}
+
+        const allowedOrigin = event.origin === window.location.origin
+          || /(^|\.)caster\.fm$/i.test(messageHost)
+          || /(^|\.)flatcastx\.com$/i.test(messageHost);
+        if (allowedOrigin) readNowPlayingPayload(event.data);
+      });
+
+      // Player doğrudan sayfaya gömülürse bu olay veya yardımcı fonksiyon kullanılabilir.
+      window.addEventListener("casterfm:metadata", (event) => readNowPlayingPayload(event.detail));
+      window.omurFmNowPlaying = setNowPlaying;
+
+      const refreshNowPlaying = async () => {
+        try {
+          const response = await fetch(`/api/radio-status?t=${Date.now()}`, { cache: "no-store" });
+          if (!response.ok) return;
+          readNowPlayingPayload(await response.json());
+        } catch {}
+      };
+
+      refreshNowPlaying();
+      window.setInterval(refreshNowPlaying, 15000);
+
+      const syncMobileLayout = () => {
+        if (!mobileLayout.matches) {
+          document.documentElement.style.removeProperty("--mobile-scale");
+          frameViewport.style.removeProperty("height");
+          return;
+        }
+
+        const scale = Math.min(1, document.documentElement.clientWidth / 760);
+        document.documentElement.style.setProperty("--mobile-scale", String(scale));
+        frameViewport.style.height = `${siteFrame.offsetHeight * scale}px`;
+      };
+
+      syncMobileLayout();
+      window.addEventListener("resize", syncMobileLayout, { passive: true });
+
+      const updateClock = () => {
+        const now = new Date();
+        clockTime.textContent = new Intl.DateTimeFormat("tr-TR", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit"
+        }).format(now);
+        clockDate.textContent = new Intl.DateTimeFormat("tr-TR", {
+          weekday: "short",
+          day: "numeric",
+          month: "short"
+        }).format(now);
+      };
+
+      updateClock();
+      window.setInterval(updateClock, 1000);
+
+      radioAudio.volume = Number(liveRadioVolume.value);
+      radioVolume.value = liveRadioVolume.value;
+
+      const updateLivePlayer = () => {
+        const isPlaying = !radioAudio.paused;
+        liveRadioPlayIcon.textContent = isPlaying ? "Ⅱ" : "▶";
+        liveRadioPlayLabel.textContent = isPlaying ? "PAUSE" : "PLAY";
+        liveRadioPlay.setAttribute("aria-label", isPlaying ? "Radyoyu duraklat" : "Radyoyu oynat");
+      };
+
+      liveRadioPlay.addEventListener("click", async () => {
+        if (!radioAudio.paused) {
+          radioAudio.pause();
+          return;
+        }
+
+        try {
+          await radioAudio.play();
+          radioMessage.textContent = "Radyo oynatılıyor.";
+        } catch {
+          radioMessage.textContent = "Radyo yayını başlatılamadı.";
+        }
+      });
+
+      liveRadioMute.addEventListener("click", () => {
+        radioAudio.muted = !radioAudio.muted;
+        liveRadioMute.setAttribute("aria-label", radioAudio.muted ? "Sesi aç" : "Sesi kapat");
+        liveRadioMute.title = radioAudio.muted ? "Sesi aç" : "Sesi kapat";
+      });
+
+      liveRadioVolume.addEventListener("input", () => {
+        radioAudio.volume = Number(liveRadioVolume.value);
+        radioVolume.value = liveRadioVolume.value;
+      });
+
+      radioAudio.addEventListener("play", updateLivePlayer);
+      radioAudio.addEventListener("pause", updateLivePlayer);
+      updateLivePlayer();
+
+      radioPlay.addEventListener("click", async () => {
+        radioStatusLight.classList.remove("is-stopped");
+
+        if (!radioAudio.currentSrc && !radioAudio.getAttribute("src")) {
+          radioMessage.textContent = "Yayın bağlantısı henüz eklenmedi.";
+          return;
+        }
+
+        try {
+          await radioAudio.play();
+          radioMessage.textContent = "Radyo oynatılıyor.";
+        } catch {
+          radioMessage.textContent = "Radyo yayını başlatılamadı.";
+        }
+      });
+
+      radioStop.addEventListener("click", () => {
+        radioStatusLight.classList.add("is-stopped");
+        radioAudio.pause();
+        radioAudio.currentTime = 0;
+        radioMessage.textContent = "Radyo durduruldu.";
+      });
+
+      radioMute.addEventListener("click", () => {
+        radioAudio.muted = !radioAudio.muted;
+        radioMute.innerHTML = radioAudio.muted ? "&#128263;" : "&#128266;";
+        radioMute.setAttribute("aria-label", radioAudio.muted ? "Sesi aç" : "Sesi kapat");
+        radioMute.title = radioAudio.muted ? "Sesi aç" : "Sesi kapat";
+        radioMessage.textContent = radioAudio.muted ? "Ses kapatıldı." : "Ses açıldı.";
+      });
+
+      radioVolume.addEventListener("input", () => {
+        radioAudio.volume = Number(radioVolume.value);
+      });
+
+      const radioControls = document.querySelector(".caster-radio-controls");
+
+      document.addEventListener("mousemove", (event) => {
+        clock.style.display = "block";
+
+        const clockWidth = clock.offsetWidth;
+        const clockHeight = clock.offsetHeight;
+        const radioRect = radioControls?.getBoundingClientRect();
+        const isOverRadio = radioRect
+          && event.clientX >= radioRect.left
+          && event.clientX <= radioRect.right
+          && event.clientY >= radioRect.top
+          && event.clientY <= radioRect.bottom;
+        let x = event.clientX + 22;
+        let y = isOverRadio ? radioRect.top - clockHeight - 8 : event.clientY + 18;
+
+        x = Math.max(8, Math.min(x, window.innerWidth - clockWidth - 8));
+        y = Math.max(8, Math.min(y, window.innerHeight - clockHeight - 8));
+        clock.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      }, { passive: true });
+
+      document.addEventListener("mouseleave", () => {
+        clock.style.display = "none";
+      });
+
+      if (!reduceMotion && window.matchMedia("(pointer: fine)").matches) {
+
+        for (let index = 0; index < 10; index += 1) {
+          const heart = document.createElement("span");
+          heart.className = "heart";
+          heart.textContent = "♥";
+          heart.style.left = `${Math.random() * 100}vw`;
+          heart.style.animationDuration = `${7 + Math.random() * 8}s`;
+          heart.style.animationDelay = `${Math.random() * -12}s`;
+          heart.style.opacity = String(0.35 + Math.random() * 0.55);
+          document.body.append(heart);
+        }
+      }
+
+      try {
+        const key = "omur-fm-visitor-count";
+        const visits = Number.parseInt(localStorage.getItem(key) || "0", 10) + 1;
+        localStorage.setItem(key, String(visits));
+        counter.value = String(visits).padStart(6, "0");
+      } catch {
+        counter.value = "000001";
+      }
+    })();
+  </script>
+</body>
 </html>
