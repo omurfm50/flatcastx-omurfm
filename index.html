@@ -227,8 +227,8 @@
     }
 
     .caster-radio-controls {
-      width: 714px;
-      max-width: none;
+      width: min(714px, 100%);
+      max-width: 100%;
       height: 48px;
       padding: 0;
       border-radius: 24px;
@@ -834,6 +834,19 @@
         height: 554px;
         transform: scale(.6933333333);
         transform-origin: top left;
+      }
+
+      .live-volume {
+        left: 332px;
+        gap: 6px;
+      }
+
+      .live-volume-slider {
+        width: 112px;
+      }
+
+      .live-play {
+        right: 25px;
       }
 
       .mouse-clock {
