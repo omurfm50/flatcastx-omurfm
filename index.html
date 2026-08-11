@@ -237,6 +237,7 @@
 
     .caster-radio-controls .cstrEmbed {
       position: absolute !important;
+      z-index: 10 !important;
       right: auto !important;
       top: -132px !important;
       bottom: auto !important;
@@ -245,6 +246,7 @@
       max-width: none !important;
       height: 192px !important;
       border: 0 !important;
+      opacity: .001;
     }
 
     .caster-radio-controls .cstrEmbed iframe {
@@ -252,7 +254,7 @@
       right: auto !important;
       top: 0 !important;
       bottom: auto !important;
-      left: -7px !important;
+      left: -20px !important;
       width: 714px !important;
       max-width: none !important;
       height: 192px !important;
@@ -849,6 +851,10 @@
         right: 25px;
       }
 
+      .caster-radio-controls .cstrEmbed iframe {
+        left: -51px !important;
+      }
+
       .mouse-clock {
         display: none !important;
       }
@@ -914,6 +920,15 @@
       </section>
 
       <div class="radio-controls caster-radio-controls" role="group" aria-label="Caster.fm radyo kontrolleri">
+        <div
+          class="cstrEmbed"
+          data-type="newStreamPlayer"
+          data-publicToken="79ea291b-69b6-42ba-a9e7-378a6c72cc54"
+          data-theme="dark"
+          data-color="e81e4d"
+          data-channelId="a26000c2-03c9-4a22-abaa-99f4c6330d05"
+          data-rendered="false"
+        ><a href="https://www.caster.fm">Shoutcast Hosting</a><a href="https://www.caster.fm">Stream Hosting</a><a href="https://www.caster.fm">Radio Server Hosting</a></div>
         <span class="live-caster-logo" aria-label="Ömür.fm">
           <span>Ömür</span><span class="live-caster-domain">.fm</span>
         </span>
@@ -949,7 +964,7 @@
         <button id="radio-mute" type="button"></button>
         <input id="radio-volume" type="range" min="0" max="1" step="0.01" value="0.8">
         <span class="radio-message" id="radio-message" role="status" aria-live="polite"></span>
-        <audio id="radio-audio" preload="none" src="https://sapircast.caster.fm:17681/BHufv?token=ce180395cb90e787d23af59e7ff7e580"></audio>
+        <audio id="radio-audio" preload="none"></audio>
       </div>
 
       <footer class="credits">
@@ -969,6 +984,7 @@
     <small id="clock-date"></small>
   </div>
 
+  <script src="https://cdn.cloud.caster.fm/widgets/embed.js"></script>
   <script>
     (() => {
       const clock = document.querySelector("#mouse-clock");
