@@ -231,29 +231,27 @@
       max-width: 100%;
       height: 48px;
       padding: 0;
+      border: 0;
       border-radius: 24px;
+      box-shadow: none;
       background: #686868;
     }
 
     .caster-radio-controls .cstrEmbed {
       position: absolute !important;
       z-index: 10 !important;
-      right: auto !important;
-      top: -132px !important;
-      bottom: auto !important;
+      top: -135px !important;
       left: 16px !important;
       width: 714px !important;
       max-width: none !important;
       height: 192px !important;
       border: 0 !important;
-      opacity: .001;
+      opacity: 1;
     }
 
     .caster-radio-controls .cstrEmbed iframe {
       position: absolute !important;
-      right: auto !important;
       top: 0 !important;
-      bottom: auto !important;
       left: -20px !important;
       width: 714px !important;
       max-width: none !important;
@@ -261,25 +259,23 @@
       border: 0 !important;
     }
 
-    .caster-radio-controls .cstrEmbed > a {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
+    .caster-radio-controls .cstrEmbed > a,
+    .caster-radio-controls > :not(.cstrEmbed):not(.radio-name):not(.live-caster-logo) {
+      display: none !important;
     }
 
     .live-caster-logo {
       position: absolute;
-      z-index: 4;
-      top: 14px;
-      left: 27px;
+      z-index: 23;
+      top: 13px;
+      left: 13px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 94px;
-      height: 20px;
+      width: 46px;
+      height: 22px;
+      overflow: hidden;
+      background: #717276;
       color: #fff;
       font: bold italic 14px/1 Arial, sans-serif;
       letter-spacing: -.6px;
@@ -288,15 +284,8 @@
       pointer-events: none;
     }
 
-    .live-caster-domain {
-      margin-left: 2px;
-      padding: 2px 3px;
-      border-radius: 2px;
-      background: #e51b45;
-      color: #fff;
-      font-size: 11px;
-      letter-spacing: -.4px;
-      text-shadow: 0 1px 1px #8b0929;
+    .live-caster-mobile-domain {
+      display: none;
     }
 
     .live-volume {
@@ -442,18 +431,25 @@
 
     .caster-radio-controls .radio-name {
       position: absolute;
-      z-index: 3;
+      z-index: 22;
       top: 9px;
       right: 355px;
-      left: 121px;
+      left: 108px;
       height: 28px;
+      border: 1px solid #070707;
       border-radius: 14px;
+      box-shadow:
+        inset 0 1px 3px #000,
+        0 1px 0 rgba(255, 255, 255, .18);
       background: linear-gradient(#030303, #111);
+      color: #fff;
+      font: 700 12px/28px Tahoma, Arial, sans-serif;
+      text-shadow: 0 1px 1px #000, 0 0 4px #e81e4d;
       pointer-events: none;
     }
 
     .caster-radio-controls .radio-name-track {
-      line-height: 26px;
+      line-height: 28px;
     }
 
     .caster-left-cap,
@@ -493,7 +489,26 @@
     }
 
     .caster-radio-controls::before {
-      z-index: 2;
+      z-index: 20;
+      inset: 0;
+      height: auto;
+      box-sizing: border-box;
+      border: 4px solid #000;
+      border-radius: 24px;
+      background: none;
+    }
+
+    .caster-radio-controls::after {
+      position: absolute;
+      z-index: 19;
+      top: 4px;
+      right: 4px;
+      bottom: 4px;
+      width: 14px;
+      border-radius: 0 20px 20px 0;
+      background: #686868;
+      content: "";
+      pointer-events: none;
     }
 
     .radio-control-button {
@@ -855,6 +870,23 @@
         left: -51px !important;
       }
 
+      .live-caster-logo {
+        left: 4px;
+        width: 78px;
+        gap: 2px;
+      }
+
+      .live-caster-mobile-domain {
+        display: inline-block;
+        padding: 2px 3px;
+        border-radius: 2px;
+        background: #e51b45;
+        color: #fff;
+        font-size: 11px;
+        letter-spacing: -.4px;
+        text-shadow: 0 1px 1px #8b0929;
+      }
+
       .mouse-clock {
         display: none !important;
       }
@@ -930,10 +962,10 @@
           data-rendered="false"
         ><a href="https://www.caster.fm">Shoutcast Hosting</a><a href="https://www.caster.fm">Stream Hosting</a><a href="https://www.caster.fm">Radio Server Hosting</a></div>
         <span class="live-caster-logo" aria-label="Ömür.fm">
-          <span>Ömür</span><span class="live-caster-domain">.fm</span>
+          <span>Ömür</span><span class="live-caster-mobile-domain">.fm</span>
         </span>
-        <span class="radio-name" id="radio-now-playing" role="status" aria-live="polite" aria-label="Şu an çalan">
-          <span class="radio-name-track" id="radio-now-playing-text">&#9835; &Ouml;M&Uuml;R FM &#9835;</span>
+        <span class="radio-name" id="radio-now-playing" role="status" aria-live="polite" aria-label="Ömür FM">
+          <span class="radio-name-track" id="radio-now-playing-text">Ömür FM</span>
         </span>
         <div class="live-volume">
           <button class="live-volume-icon" id="live-radio-mute" type="button" aria-label="Sesi kapat" title="Sesi kapat">
@@ -1017,10 +1049,10 @@
         const cleanTitle = cleanMetadata(title);
         const label = [cleanArtist, cleanTitle].filter(Boolean).join(" - ");
 
-        if (!label || !radioNowPlayingText) return;
-        radioNowPlayingText.textContent = `♫ ${label} ♫`;
-        radioNowPlayingText.classList.add("is-scrolling");
-        radioNowPlaying?.setAttribute("aria-label", `Şu an çalan: ${label}`);
+        if (!radioNowPlayingText) return;
+        radioNowPlayingText.textContent = label ? `♫ ${label} ♫` : "Ömür FM";
+        radioNowPlayingText.classList.toggle("is-scrolling", Boolean(label));
+        radioNowPlaying?.setAttribute("aria-label", label ? `Şu an çalan: ${label}` : "Ömür FM");
 
         // Yeni parça geldiğinde kayan yazıyı baştan başlat.
         radioNowPlayingText.style.animation = "none";
@@ -1029,7 +1061,10 @@
       };
 
       const readNowPlayingPayload = (payload) => {
-        if (!payload) return;
+        if (!payload) {
+          setNowPlaying();
+          return;
+        }
 
         let data = payload;
         if (typeof data === "string") {
@@ -1073,9 +1108,14 @@
       const refreshNowPlaying = async () => {
         try {
           const response = await fetch(`/api/radio-status?t=${Date.now()}`, { cache: "no-store" });
-          if (!response.ok) return;
+          if (!response.ok) {
+            setNowPlaying();
+            return;
+          }
           readNowPlayingPayload(await response.json());
-        } catch {}
+        } catch {
+          setNowPlaying();
+        }
       };
 
       refreshNowPlaying();
@@ -1118,7 +1158,7 @@
 
       const updateLivePlayer = () => {
         const isPlaying = !radioAudio.paused;
-        liveRadioPlayIcon.textContent = isPlaying ? "Ⅱ" : "▶";
+        liveRadioPlayIcon.textContent = isPlaying ? "❚❚" : "▶";
         liveRadioPlayLabel.textContent = isPlaying ? "PAUSE" : "PLAY";
         liveRadioPlay.setAttribute("aria-label", isPlaying ? "Radyoyu duraklat" : "Radyoyu oynat");
       };
@@ -1132,8 +1172,10 @@
         try {
           await radioAudio.play();
           radioMessage.textContent = "Radyo oynatılıyor.";
-        } catch {
+        } catch (error) {
+          console.error("[radio-player] Yayın başlatılamadı", error);
           radioMessage.textContent = "Radyo yayını başlatılamadı.";
+          liveRadioPlay.title = "Yayın başlatılamadı. Tekrar deneyin.";
         }
       });
 
@@ -1150,6 +1192,18 @@
 
       radioAudio.addEventListener("play", updateLivePlayer);
       radioAudio.addEventListener("pause", updateLivePlayer);
+      radioAudio.addEventListener("playing", () => {
+        radioMessage.textContent = "Radyo oynatılıyor.";
+        liveRadioPlay.removeAttribute("title");
+      });
+      radioAudio.addEventListener("error", () => {
+        console.error("[radio-player] Medya hatası", {
+          code: radioAudio.error?.code,
+          message: radioAudio.error?.message
+        });
+        radioMessage.textContent = "Radyo yayını başlatılamadı. Tekrar deneyin.";
+        liveRadioPlay.title = "Yayın başlatılamadı. Tekrar deneyin.";
+      });
       updateLivePlayer();
 
       radioPlay.addEventListener("click", async () => {
