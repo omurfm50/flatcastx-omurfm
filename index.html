@@ -53,7 +53,7 @@
 
     .site-frame {
       width: 100%;
-      min-width: 1260px;
+      min-width: 760px;
       margin: 0 auto;
       padding: 10px;
       border: 10px outset #eee;
@@ -173,21 +173,8 @@
     .player-panel {
       position: relative;
       z-index: 6;
-      width: 100%;
+      width: min(940px, 100%);
       margin-top: var(--section-gap);
-    }
-
-    @media (min-width: 801px) {
-      .site-inner {
-        padding-right: 3px;
-        padding-left: 3px;
-      }
-
-      .player-panel {
-        width: calc(100% - 86px);
-        padding-right: 12px;
-        padding-left: 12px;
-      }
     }
 
     .player-panel .panel-content {
@@ -198,7 +185,7 @@
       display: grid;
       place-items: center;
       width: 100%;
-      height: 669px;
+      height: 554px;
       border: 2px inset #eee;
       background:
         linear-gradient(rgba(0, 0, 0, .18), rgba(0, 0, 0, .18)),
@@ -209,12 +196,9 @@
 
     .player iframe {
       display: block;
-      width: 1080px;
-      max-width: 100%;
-      height: 554px;
+      width: 100%;
+      height: 100%;
       border: 0;
-      transform: scaleY(1.2);
-      transform-origin: center;
     }
 
     .radio-controls {
@@ -251,6 +235,33 @@
       border-radius: 24px;
       box-shadow: none;
       background: #686868;
+    }
+
+    .caster-radio-controls .cstrEmbed {
+      position: absolute !important;
+      z-index: 10 !important;
+      top: -135px !important;
+      left: 16px !important;
+      width: 714px !important;
+      max-width: none !important;
+      height: 192px !important;
+      border: 0 !important;
+      opacity: 1;
+    }
+
+    .caster-radio-controls .cstrEmbed iframe {
+      position: absolute !important;
+      top: 0 !important;
+      left: -20px !important;
+      width: 714px !important;
+      max-width: none !important;
+      height: 192px !important;
+      border: 0 !important;
+    }
+
+    .caster-radio-controls .cstrEmbed > a,
+    .caster-radio-controls > :not(.cstrEmbed):not(.radio-name):not(.live-caster-logo) {
+      display: none !important;
     }
 
     .live-caster-logo {
@@ -360,7 +371,7 @@
 
     .live-play {
       position: absolute;
-      z-index: 24;
+      z-index: 5;
       top: 10px;
       right: 40px;
       display: flex;
@@ -832,18 +843,13 @@
         overflow: hidden;
       }
 
-      .player-panel {
-        width: 100%;
-      }
-
       .player iframe {
         position: absolute;
         top: 2px;
         left: 2px;
-        width: 1080px;
-        max-width: none;
+        width: 900px;
         height: 554px;
-        transform: scale(.5777777778, .6933333333);
+        transform: scale(.6933333333);
         transform-origin: top left;
       }
 
@@ -858,6 +864,10 @@
 
       .live-play {
         right: 25px;
+      }
+
+      .caster-radio-controls .cstrEmbed iframe {
+        left: -51px !important;
       }
 
       .live-caster-logo {
@@ -930,8 +940,8 @@
             <div class="player">
               <iframe
                 src="https://flatcastx.com/sid/1567"
-                width="1080"
-                height="665"
+                width="900"
+                height="554"
                 frameborder="0"
                 allow="autoplay"
                 title="Ömür FM radyo yayını"
@@ -942,6 +952,15 @@
       </section>
 
       <div class="radio-controls caster-radio-controls" role="group" aria-label="Caster.fm radyo kontrolleri">
+        <div
+          class="cstrEmbed"
+          data-type="newStreamPlayer"
+          data-publicToken="79ea291b-69b6-42ba-a9e7-378a6c72cc54"
+          data-theme="dark"
+          data-color="e81e4d"
+          data-channelId="a26000c2-03c9-4a22-abaa-99f4c6330d05"
+          data-rendered="false"
+        ><a href="https://www.caster.fm">Shoutcast Hosting</a><a href="https://www.caster.fm">Stream Hosting</a><a href="https://www.caster.fm">Radio Server Hosting</a></div>
         <span class="live-caster-logo" aria-label="Ömür.fm">
           <span>Ömür</span><span class="live-caster-mobile-domain">.fm</span>
         </span>
@@ -997,6 +1016,7 @@
     <small id="clock-date"></small>
   </div>
 
+  <script src="https://cdn.cloud.caster.fm/widgets/embed.js"></script>
   <script>
     (() => {
       const clock = document.querySelector("#mouse-clock");
@@ -1141,34 +1161,15 @@
         liveRadioPlayIcon.textContent = isPlaying ? "❚❚" : "▶";
         liveRadioPlayLabel.textContent = isPlaying ? "PAUSE" : "PLAY";
         liveRadioPlay.setAttribute("aria-label", isPlaying ? "Radyoyu duraklat" : "Radyoyu oynat");
-        liveRadioPlay.title = isPlaying ? "Radyoyu duraklat" : "Radyoyu oynat";
-      };
-
-      const loadRadioStream = async () => {
-        if (radioAudio.getAttribute("src")) return true;
-
-        const response = await fetch(`/api/radio-stream?t=${Date.now()}`, { cache: "no-store" });
-        if (!response.ok) throw new Error(`Stream endpoint responded with ${response.status}`);
-
-        const data = await response.json();
-        if (!data.streamUrl) throw new Error("Stream URL is missing");
-
-        radioAudio.src = data.streamUrl;
-        return true;
       };
 
       liveRadioPlay.addEventListener("click", async () => {
         if (!radioAudio.paused) {
           radioAudio.pause();
-          radioAudio.removeAttribute("src");
-          radioAudio.load();
-          updateLivePlayer();
-          radioMessage.textContent = "Radyo durduruldu.";
           return;
         }
 
         try {
-          await loadRadioStream();
           await radioAudio.play();
           radioMessage.textContent = "Radyo oynatılıyor.";
         } catch (error) {
@@ -1193,11 +1194,9 @@
       radioAudio.addEventListener("pause", updateLivePlayer);
       radioAudio.addEventListener("playing", () => {
         radioMessage.textContent = "Radyo oynatılıyor.";
-        liveRadioPlay.title = "Radyoyu duraklat";
+        liveRadioPlay.removeAttribute("title");
       });
-      radioAudio.addEventListener("ended", updateLivePlayer);
       radioAudio.addEventListener("error", () => {
-        if (!radioAudio.getAttribute("src")) return;
         console.error("[radio-player] Medya hatası", {
           code: radioAudio.error?.code,
           message: radioAudio.error?.message
