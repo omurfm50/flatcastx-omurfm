@@ -46,7 +46,9 @@ export default async function handler(request, response) {
       const parts = rawNowPlaying.split(/\s+(?:-|\u2013|\u2014|\||\u2022)\s+/, 2);
       if (parts.length === 2) {
         artist ||= cleanValue(parts[0]);
-        title ||= cleanValue(parts[1]);
+        // Caster.fm playlist titles already contain "Artist - Song". Once the
+        // artist is extracted, keep only the song portion to avoid duplicates.
+        if (!title || title === rawNowPlaying) title = cleanValue(parts[1]);
       } else if (!title) {
         title = rawNowPlaying;
       }
