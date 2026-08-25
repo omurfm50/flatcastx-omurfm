@@ -341,7 +341,7 @@
       align-items: center;
       justify-content: flex-start;
       gap: 2px;
-      width: 104px;
+      width: 84px;
       height: 40px;
       padding-left: 9px;
       overflow: hidden;
@@ -513,11 +513,11 @@
       position: absolute;
       z-index: 22;
       top: 9px;
-      right: 355px;
-      left: 108px;
+      right: 373px;
+      left: 96px;
       height: 28px;
       border: 1px solid #070707;
-      border-radius: 14px;
+      border-radius: 999px;
       box-shadow:
         inset 0 1px 3px #000,
         0 1px 0 rgba(255, 255, 255, .18);
@@ -963,7 +963,7 @@
 
       .live-caster-logo {
         left: 4px;
-        width: 104px;
+        width: 84px;
         gap: 2px;
       }
 
@@ -1153,7 +1153,6 @@
       const siteFrame = document.querySelector(".site-frame");
       const mobileLayout = window.matchMedia("(max-width: 800px)");
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
       const cleanMetadata = (value) => String(value || "").replace(/\s+/g, " ").trim();
 
       const setNowPlaying = (artist, title) => {
