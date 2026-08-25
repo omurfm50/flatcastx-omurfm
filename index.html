@@ -325,6 +325,7 @@
       max-width: none !important;
       height: 192px !important;
       border: 0 !important;
+      pointer-events: none !important;
     }
 
     .caster-radio-controls .cstrEmbed > a,
@@ -376,7 +377,7 @@
       gap: 8px;
       height: 20px;
       color: #f2f2f2;
-      pointer-events: none;
+      pointer-events: auto;
     }
 
     .live-volume-icon {
@@ -402,6 +403,10 @@
       display: block;
       width: 21px;
       height: 21px;
+    }
+
+    .live-volume > .live-volume-icon[aria-hidden="true"] {
+      pointer-events: none;
     }
 
     .live-volume-slider {
@@ -468,10 +473,10 @@
       background: transparent;
       color: #fff;
       font: bold 14px Tahoma, Arial, sans-serif;
-      opacity: 0;
+      opacity: 1;
       text-shadow: 0 -1px 0 #8e1535, 0 1px 0 rgba(255, 255, 255, .2);
       cursor: pointer;
-      pointer-events: none;
+      pointer-events: auto;
       transition: filter .12s ease, transform .08s ease, box-shadow .08s ease;
     }
 
@@ -1110,7 +1115,7 @@
         <button id="radio-mute" type="button"></button>
         <input id="radio-volume" type="range" min="0" max="1" step="0.01" value="0.8">
         <span class="radio-message" id="radio-message" role="status" aria-live="polite"></span>
-        <audio id="radio-audio" preload="none"></audio>
+        <audio id="radio-audio" src="/api/radio-stream" preload="none"></audio>
       </div>
 
       <footer class="credits">
@@ -1283,6 +1288,9 @@
         }
 
         try {
+          if (radioAudio.error) {
+            radioAudio.src = `/api/radio-stream?t=${Date.now()}`;
+          }
           await radioAudio.play();
           radioMessage.textContent = "Radyo oynatılıyor.";
         } catch (error) {
