@@ -94,6 +94,28 @@
       padding-top: 12px;
     }
 
+    .intro-area {
+      position: relative;
+    }
+
+    .intro-speaker {
+      position: absolute;
+      top: 50%;
+      width: calc(50% - 440px);
+      height: auto;
+      object-fit: contain;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .intro-speaker--left {
+      left: 35px;
+    }
+
+    .intro-speaker--right {
+      right: 35px;
+    }
+
     .brand-banner {
       display: flex;
       align-items: center;
@@ -175,6 +197,36 @@
       z-index: 6;
       width: 100%;
       margin-top: var(--section-gap);
+    }
+
+    .chat-welcome-gif {
+      position: absolute;
+      z-index: 8;
+      top: 0;
+      bottom: 0;
+      display: grid;
+      place-items: center;
+      width: 40px;
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 0 10px rgba(255, 0, 0, .65);
+      pointer-events: none;
+    }
+
+    .chat-welcome-gif--left {
+      left: -43px;
+    }
+
+    .chat-welcome-gif--right {
+      right: -43px;
+    }
+
+    .chat-welcome-gif img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
     }
 
     @media (min-width: 801px) {
@@ -862,6 +914,10 @@
         transform-origin: top left;
       }
 
+      .intro-speaker {
+        display: none;
+      }
+
       .player {
         position: relative;
         display: block;
@@ -871,6 +927,10 @@
 
       .player-panel {
         width: 100%;
+      }
+
+      .chat-welcome-gif {
+        display: none;
       }
 
       .player iframe {
@@ -945,27 +1005,48 @@
   <div class="site-frame-viewport">
     <main class="site-frame">
       <div class="site-inner">
-      <section class="panel nav-panel" aria-label="Ömür FM logosu">
-        <div class="panel-inner">
-          <div class="panel-content">
-            <div class="brand-banner"><span>ÖMÜR FM</span></div>
-          </div>
-        </div>
-      </section>
+      <div class="intro-area">
+        <img
+          class="intro-speaker intro-speaker--left"
+          src="https://resmim.net/cdn/2026/08/23/E7woUZ.gif"
+          alt=""
+          aria-hidden="true"
+        >
+        <img
+          class="intro-speaker intro-speaker--right"
+          src="https://resmim.net/cdn/2026/08/23/E7woUZ.gif"
+          alt=""
+          aria-hidden="true"
+        >
 
-      <section class="panel welcome-panel">
-        <div class="panel-inner">
-          <div class="panel-content">
-            <h1 class="welcome">ÖMÜR FM'e HOŞ GELDİNİZ...</h1>
+        <section class="panel nav-panel" aria-label="Ömür FM logosu">
+          <div class="panel-inner">
+            <div class="panel-content">
+              <div class="brand-banner"><span>ÖMÜR FM</span></div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        <section class="panel welcome-panel">
+          <div class="panel-inner">
+            <div class="panel-content">
+              <h1 class="welcome">ÖMÜR FM'e HOŞ GELDİNİZ...</h1>
+            </div>
+          </div>
+        </section>
+      </div>
 
       <div class="dj-ticker" role="marquee" aria-label="Yayındaki DJ">
         <span class="dj-ticker-text">YAYINDA: DJ ......</span>
       </div>
 
       <section class="panel player-panel" aria-label="Radyo oynatıcı">
+        <div class="chat-welcome-gif chat-welcome-gif--left" aria-hidden="true">
+          <img src="https://resmim.net/cdn/2026/08/23/E7w8en.gif" alt="">
+        </div>
+        <div class="chat-welcome-gif chat-welcome-gif--right" aria-hidden="true">
+          <img src="https://resmim.net/cdn/2026/08/23/E7w8en.gif" alt="">
+        </div>
         <div class="panel-inner">
           <div class="panel-content">
             <div class="player">
