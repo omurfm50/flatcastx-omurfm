@@ -961,7 +961,40 @@
       }
 
       .live-play {
+        top: 5px;
         right: 5px;
+        width: 125px;
+        height: 38px;
+        border-radius: 4px 19px 19px 4px;
+        pointer-events: auto;
+        touch-action: manipulation;
+      }
+
+      .live-play-icon,
+      .live-play-label {
+        height: 38px;
+      }
+
+      .live-play-label {
+        width: 87px;
+      }
+
+      .live-volume,
+      button.live-volume-icon,
+      .live-volume-slider {
+        pointer-events: auto;
+      }
+
+      button.live-volume-icon {
+        touch-action: manipulation;
+      }
+
+      .live-volume-slider {
+        touch-action: none;
+      }
+
+      .caster-radio-controls::after {
+        inset: 4px 130px 4px 4px;
       }
 
       .caster-radio-controls .cstrEmbed iframe {
