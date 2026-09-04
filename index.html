@@ -1112,18 +1112,19 @@
   </style>
   <script>
     (() => {
+      if (!window.matchMedia("(max-width: 800px)").matches) return;
+      // Sayfa ilk yüklendiğinde gerçek ekran genişliğini kaydet
+      const baseWidth = window.screen.width;
       const applyEarlyMobileScale = () => {
-        if (!window.matchMedia("(max-width: 800px)").matches) return;
-        // Kullanıcı pinch-zoom yapmışsa JS scale'i yeniden hesaplama
-        if (window.visualViewport && window.visualViewport.scale > 1.05) return;
-        const visibleWidth = window.visualViewport?.width || window.innerWidth;
+        // Gerçek ekran genişliği değişmediyse (sadece zoom) hiçbir şey yapma
+        if (window.screen.width === baseWidth && window.innerWidth !== baseWidth) return;
+        const visibleWidth = window.screen.width;
         const scale = Math.min(1, Math.max(0, visibleWidth) / 760);
         document.documentElement.style.setProperty("--mobile-scale", String(scale));
       };
 
       applyEarlyMobileScale();
       window.addEventListener("resize", applyEarlyMobileScale, { passive: true });
-      window.visualViewport?.addEventListener("resize", applyEarlyMobileScale, { passive: true });
     })();
   </script>
 </head>
@@ -1362,16 +1363,17 @@
       refreshNowPlaying();
       window.setInterval(refreshNowPlaying, 15000);
 
+      const deviceWidth = window.screen.width;
+
       const syncResponsiveLayout = () => {
-        // Kullanıcı pinch-zoom yapmışsa layout'u yeniden hesaplama
-        if (window.visualViewport && window.visualViewport.scale > 1.05) return;
+        // Gerçek ekran boyutu değişmemişse (sadece zoom ise) layout'u bozma
+        if (mobileLayout.matches && window.screen.width === deviceWidth && window.innerWidth !== deviceWidth) return;
 
         document.documentElement.style.removeProperty("--mobile-scale");
         document.documentElement.style.removeProperty("--desktop-scale");
 
         if (mobileLayout.matches) {
-          const visibleWidth = window.visualViewport?.width || window.innerWidth;
-          const scale = Math.min(1, Math.max(0, visibleWidth) / 760);
+          const scale = Math.min(1, Math.max(0, window.screen.width) / 760);
           document.documentElement.style.setProperty("--mobile-scale", String(scale));
           frameViewport.style.height = `${siteFrame.offsetHeight * scale}px`;
           return;
@@ -1390,7 +1392,6 @@
       syncResponsiveLayout();
       window.addEventListener("load", syncResponsiveLayout, { once: true });
       window.addEventListener("resize", syncResponsiveLayout, { passive: true });
-      window.visualViewport?.addEventListener("resize", syncResponsiveLayout, { passive: true });
 
       let scrollbarFrame = 0;
       const updatePageScrollbar = () => {
